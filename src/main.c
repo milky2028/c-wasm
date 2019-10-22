@@ -2,25 +2,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-bool isArraySorted(int arr[], size_t lengthArr) {
-  for (size_t i = 1; i < lengthArr; i++) {
-    int currentItem = arr[i];
-    int lastItem = arr[i - 1];
-    if (currentItem < lastItem) {
+char* boolToString(bool b) { return b ? "true" : "false"; }
+
+bool isNumArraySorted(size_t arr[], size_t arrLength) {
+  for (size_t i = 1; i < arrLength; i++) {
+    size_t lastItem = arr[i - 1];
+    size_t currentItem = arr[i];
+    if (lastItem > currentItem) {
       return false;
     }
   }
+
   return true;
 }
 
-char* convertBoolToString(bool trueOrFalseValue) {
-  return trueOrFalseValue ? "true" : "false";
+void sort(size_t arr[], size_t arrLength) {
+  if (isNumArraySorted(arr, arrLength)) {
+    return;
+  } else {
+    for (size_t i = 1; i < arrLength; i++) {
+      size_t lastItem = arr[i - 1];
+      size_t currentItem = arr[i];
+
+      if (lastItem > currentItem) {
+        arr[i] = lastItem;
+        arr[i - 1] = currentItem;
+      }
+    }
+  }
 }
 
 int main() {
-  int arr[] = {7, 2, 2, 58, 101, 4203, 5000};
-  size_t lengthArr = sizeof(arr) / sizeof(arr[0]);
-  printf("%s\n", convertBoolToString(isArraySorted(arr, lengthArr)));
+  size_t arr[] = {1, 5, 7, 41, 2050, 9000};
+  size_t arrLength = sizeof(arr) / sizeof(arr[0]);
+  printf("%s\n", boolToString(isNumArraySorted(arr, arrLength)));
+  sort(arr, arrLength);
+  for (size_t i = 0; i < arrLength; i++) {
+    printf("%lu\n", arr[i]);
+  }
+  printf("%s\n", boolToString(isNumArraySorted(arr, arrLength)));
 
   return EXIT_SUCCESS;
 }
