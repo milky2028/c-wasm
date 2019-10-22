@@ -13,10 +13,14 @@ bool isArraySorted(int arr[], size_t lengthArr) {
   return true;
 }
 
+char* convertBoolToString(bool trueOrFalseValue) {
+  return trueOrFalseValue ? "true" : "false";
+}
+
 int main() {
-  int arr[] = {2, 2, 58, 101, 4203, 5000};
+  int arr[] = {7, 2, 2, 58, 101, 4203, 5000};
   size_t lengthArr = sizeof(arr) / sizeof(arr[0]);
-  printf("%s\n", isArraySorted(arr, lengthArr) ? "true" : "false");
+  printf("%s\n", convertBoolToString(isArraySorted(arr, lengthArr)));
 
   return EXIT_SUCCESS;
 }
